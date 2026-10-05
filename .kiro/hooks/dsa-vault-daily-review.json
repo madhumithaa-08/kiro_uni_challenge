@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "DSA Vault: Daily Review Reminder",
+      "trigger": "SessionStart",
+      "description": "On session start, surface the flashcards due today and the current streak so revision stays a daily habit.",
+      "action": {
+        "type": "command",
+        "command": "cd backend && ./.venv/bin/python -m app.cli due && ./.venv/bin/python -m app.cli progress",
+        "timeout": 15
+      }
+    }
+  ]
+}

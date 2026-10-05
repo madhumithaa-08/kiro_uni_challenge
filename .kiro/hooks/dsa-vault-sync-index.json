@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "DSA Vault: Sync Index on Solution Save",
+      "trigger": "PostFileSave",
+      "description": "When a solution file under vault/ is saved, rebuild vault/INDEX.md so the browsable archive stays in sync with the database.",
+      "matcher": "vault/.*\\.(py|java|cpp|c|js|ts|go|rs)$",
+      "action": {
+        "type": "command",
+        "command": "cd backend && ./.venv/bin/python -m app.cli sync-index",
+        "timeout": 15
+      }
+    }
+  ]
+}
