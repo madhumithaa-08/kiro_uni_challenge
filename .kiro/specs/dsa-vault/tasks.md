@@ -47,9 +47,41 @@ tasks also note which Kiro University lesson they demonstrate.
   - _Requirements: 8.1, 8.3_
 
 - [ ] 6. [Lesson 4] Property-based tests with Hypothesis
-  - Tests for slug idempotency, streak ≤ active days, scheduler due>review,
-    topo-order validity, per-topic sum == total.
-  - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
+  - [ ] 6.1 Slug idempotency & charset
+    - `slugify(slugify(s)) == slugify(s)` for any text `s`.
+    - Output matches `^[a-z0-9]+(-[a-z0-9]+)*$` or is empty; no leading/trailing
+      or doubled hyphens; no uppercase or whitespace.
+    - _Requirements: 2.4, 9.1_
+  - [ ] 6.2 Language detection total & stable
+    - `detect_language` returns a value from the known set for any input and
+      never raises; same input always yields the same result.
+    - _Requirements: 1.2_
+  - [ ] 6.3 Complexity analyzer safety
+    - `analyze` never raises on arbitrary strings, always returns Big-O-shaped
+      strings or "unknown", and never executes the input.
+    - _Requirements: 3.1, 3.2, 3.4_
+  - [ ] 6.4 Scheduler monotonicity (spaced repetition)
+    - For any card and any grade, the new `due_date` is strictly after the
+      review date (`today`); `interval_days >= 0`; `ease >= 1.3`.
+    - Grade "again" never produces a larger interval than grade "good" from the
+      same card.
+    - _Requirements: 6.4, 6.5, 9.3_
+  - [ ] 6.5 Streak bounds & reset
+    - `current_streak(active_days, today) <= len(active_days)` and
+      `<= days elapsed since first active day`; never negative.
+    - A gap day before today forces `current_streak == 0` unless today is active.
+    - `longest_streak >= current_streak` for the same day set.
+    - _Requirements: 5.1, 5.2, 5.3, 9.2_
+  - [ ] 6.6 Learning-path topological validity
+    - On any generated acyclic DAG, `topological_path` returns every reachable
+      topic exactly once (no duplicates, no omissions) and never places a topic
+      before one of its prerequisites.
+    - On any generated DAG with an injected cycle, it raises `CycleError`.
+    - _Requirements: 7.1, 7.2, 7.3, 9.4_
+  - [ ] 6.7 Per-topic counts reconcile
+    - The sum of per-topic solved counts always equals the total solved count
+      for any generated set of problem records.
+    - _Requirements: 5.4, 5.5, 9.5_
 
 - [ ] 7. [Lesson 3] Agent hook
   - Hook that, on new solution file in `vault/`, triggers a progress/flashcard
