@@ -1,0 +1,15 @@
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+backend/dsa_vault.db
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/
+
+# OS
+.DS_Store
+
+# NOTE: never ignore .kiro/ — it is required for challenge scoring.
+# The vault/ tree is intentionally committed (data for the MCP server).

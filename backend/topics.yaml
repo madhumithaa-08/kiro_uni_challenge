@@ -1,0 +1,22 @@
+# Topic DAG: each topic maps to its list of prerequisite topic slugs.
+# Used by domain/learning_path.py to build prerequisite-respecting paths.
+# Must stay acyclic — learning_path.topological_path raises CycleError otherwise.
+
+arrays: []
+strings: []
+hashing: [arrays]
+two-pointers: [arrays]
+sliding-window: [two-pointers]
+stack: [arrays]
+queue: [arrays]
+linked-lists: []
+recursion: []
+sorting: [arrays]
+binary-search: [sorting]
+trees: [recursion, linked-lists]
+heaps: [trees]
+graphs: [trees]
+backtracking: [recursion]
+greedy: [sorting]
+dynamic-programming: [recursion, arrays]
+tries: [trees, strings]
