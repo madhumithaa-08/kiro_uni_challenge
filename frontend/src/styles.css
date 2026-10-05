@@ -1,0 +1,169 @@
+:root {
+  --bg: #0f1115;
+  --panel: #171a21;
+  --panel-2: #1f232c;
+  --border: #2a2f3a;
+  --text: #e6e8ec;
+  --muted: #9aa3b2;
+  --accent: #5b8cff;
+  --accent-2: #38d39f;
+  --warn: #ffb454;
+  --danger: #ff6b6b;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a { color: var(--accent); text-decoration: none; }
+
+.app { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 220px;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 20px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.brand { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.brand span { color: var(--accent); }
+.tagline { color: var(--muted); font-size: 12px; margin-bottom: 24px; }
+
+.nav a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--text);
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+.nav a:hover { background: var(--panel-2); }
+.nav a.active { background: var(--accent); color: #fff; }
+
+.main { flex: 1; padding: 28px 32px; max-width: 1000px; }
+.page-title { font-size: 24px; font-weight: 700; margin: 0 0 20px; }
+
+.grid { display: grid; gap: 16px; }
+.grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+.stat { text-align: center; }
+.stat .value { font-size: 32px; font-weight: 700; color: var(--accent-2); }
+.stat .label { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+label { display: block; font-size: 13px; color: var(--muted); margin: 12px 0 6px; }
+input, select, textarea {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+}
+textarea { min-height: 180px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+button:hover { filter: brightness(1.08); }
+button.secondary { background: var(--panel-2); border: 1px solid var(--border); }
+button.good { background: var(--accent-2); }
+button.again { background: var(--danger); }
+button.easy { background: var(--warn); color: #1a1a1a; }
+button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.row { display: flex; gap: 10px; align-items: center; }
+.row.wrap { flex-wrap: wrap; }
+.spacer { flex: 1; }
+
+.badge {
+  display: inline-block;
+  background: var(--panel-2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 12px;
+  margin-right: 6px;
+}
+.badge.topic { color: var(--accent); border-color: var(--accent); }
+.badge.cx { color: var(--accent-2); border-color: var(--accent-2); }
+
+pre {
+  background: #0b0d11;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  overflow: auto;
+  font-size: 13px;
+}
+
+.list-item {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+.list-item:hover { border-color: var(--accent); }
+.list-item h3 { margin: 0 0 6px; font-size: 15px; }
+
+.error {
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid var(--danger);
+  color: #ffd0d0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+.success {
+  background: rgba(56, 211, 159, 0.12);
+  border: 1px solid var(--accent-2);
+  color: #c9ffe9;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+.muted { color: var(--muted); }
+.path-step { display: inline-block; }
+.path-arrow { color: var(--muted); margin: 0 8px; }
+.flashcard {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.flashcard .front { font-size: 18px; font-weight: 600; }
+.flashcard .back { font-size: 15px; color: var(--accent-2); margin-top: 16px; }
