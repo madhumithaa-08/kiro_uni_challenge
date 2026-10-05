@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "vault-fs": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./vault"],
+      "disabled": false,
+      "autoApprove": ["read_file", "read_text_file", "list_directory", "directory_tree", "search_files", "get_file_info"],
+      "disabledTools": ["write_file", "edit_file", "create_directory", "move_file"]
+    }
+  }
+}
