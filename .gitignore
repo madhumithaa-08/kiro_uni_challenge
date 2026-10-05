@@ -3,6 +3,8 @@ backend/.venv/
 __pycache__/
 *.pyc
 backend/dsa_vault.db
+backend/.hypothesis/
+.pytest_cache/
 
 # Node / frontend
 frontend/node_modules/
