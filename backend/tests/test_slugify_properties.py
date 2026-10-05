@@ -32,3 +32,12 @@ def test_slug_charset_and_shape(s: str) -> None:
 def test_slug_stable_across_inputs(s: str) -> None:
     # Deterministic: same input always maps to the same slug.
     assert slugify(s) == slugify(s)
+
+
+@given(st.text(), st.integers(min_value=1, max_value=80))
+def test_slug_respects_max_length(s: str, limit: int) -> None:
+    out = slugify(s, max_length=limit)
+    # Never exceeds the cap, stays a clean slug, and is idempotent under the cap.
+    assert len(out) <= limit
+    assert out == "" or SLUG_RE.match(out)
+    assert slugify(out, max_length=limit) == out

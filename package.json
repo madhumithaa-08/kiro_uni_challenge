@@ -1,0 +1,11 @@
+{
+  "name": "dsa-vault-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DSA Vault — Personal local-first tracker and notes tool for Data Structures & Algorithms",
+  "scripts": {
+    "start": "./start.sh",
+    "dev": "./start.sh",
+    "test": "cd backend && ./.venv/bin/python -m pytest -q"
+  }
+}

@@ -201,6 +201,14 @@ class Database:
         row = self._conn.execute("SELECT COUNT(*) AS c FROM flashcards").fetchone()
         return int(row["c"])
 
+    def delete_problem(self, pid: int) -> dict[str, Any] | None:
+        problem = self.get_problem(pid)
+        if problem is None:
+            return None
+        self._conn.execute("DELETE FROM problems WHERE id=?", (pid,))
+        self._conn.commit()
+        return problem
+
     # ----- activity ---------------------------------------------------------
     def record_activity(self, day: date, kind: str) -> None:
         self._conn.execute(
@@ -212,3 +220,7 @@ class Database:
     def active_days(self) -> set[date]:
         rows = self._conn.execute("SELECT day FROM activity").fetchall()
         return {date.fromisoformat(r["day"]) for r in rows}
+
+    def list_activity_history(self) -> list[dict[str, Any]]:
+        rows = self._conn.execute("SELECT day, COUNT(*) as count FROM activity GROUP BY day ORDER BY day ASC").fetchall()
+        return [{"day": r["day"], "count": r["count"]} for r in rows]

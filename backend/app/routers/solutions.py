@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException, Response
 
 from ..deps import get_db, get_vault_root
 from ..schemas import SolutionCreate, SolutionOut, SolutionUpdate
@@ -58,3 +58,23 @@ def update_solution(solution_id: int, payload: SolutionUpdate) -> SolutionOut:
     )
     assert updated is not None
     return _to_out(updated)
+
+
+@router.delete("/{solution_id}", status_code=204, response_class=Response)
+def delete_solution(solution_id: int) -> Response:
+    db = get_db()
+    problem = db.delete_problem(solution_id)
+    if problem is None:
+        raise HTTPException(status_code=404, detail="solution not found")
+    # Clean up file from vault if present
+    file_path = problem.get("file_path")
+    if file_path:
+        vault_root = get_vault_root()
+        full_path = vault_root / file_path
+        if full_path.is_file():
+            try:
+                full_path.unlink()
+            except OSError:
+                pass
+    return Response(status_code=204)
+

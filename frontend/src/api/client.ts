@@ -97,8 +97,11 @@ export const api = {
     request<Solution>("/solutions", { method: "POST", body: JSON.stringify(payload) }),
   updateSolution: (id: number, fields: { explanation?: string; notes?: string }) =>
     request<Solution>(`/solutions/${id}`, { method: "PATCH", body: JSON.stringify(fields) }),
+  deleteSolution: (id: number) =>
+    request<void>(`/solutions/${id}`, { method: "DELETE" }),
 
   progress: () => request<Progress>("/progress"),
+  activityHeatmap: () => request<{ day: string; count: number }[]>("/progress/heatmap"),
 
   dueCards: () => request<Flashcard[]>("/review/due"),
   gradeCard: (id: number, grade: "again" | "good" | "easy") =>

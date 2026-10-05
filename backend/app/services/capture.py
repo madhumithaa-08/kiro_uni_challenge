@@ -32,7 +32,8 @@ def capture_solution(
     """Execute the full capture flow and return the stored problem dict."""
     today = today or date.today()
     lang = language or detect_language(code, None)
-    slug = slugify(problem_slug or title) or "solution"
+    # Cap the slug length so a long title can't become a monster filename.
+    slug = slugify(problem_slug or title, max_length=60) or "solution"
 
     result = complexity_mod.analyze(code, lang)
     explanation = generate.build_explanation(title, topic, lang, result)

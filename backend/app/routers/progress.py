@@ -14,3 +14,9 @@ router = APIRouter(prefix="/api/progress", tags=["progress"])
 @router.get("", response_model=ProgressOut)
 def progress() -> ProgressOut:
     return ProgressOut(**get_progress(get_db()))
+
+
+@router.get("/heatmap")
+def heatmap() -> list[dict[str, str | int]]:
+    db = get_db()
+    return db.list_activity_history()

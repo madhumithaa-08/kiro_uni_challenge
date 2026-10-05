@@ -71,3 +71,27 @@ def test_learn_path_cycle_free(client) -> None:
 
 def test_learn_path_unknown_topic_404(client) -> None:
     assert client.get("/api/learn/path", params={"topic": "nonsense"}).status_code == 404
+
+
+def test_delete_solution(client) -> None:
+    payload = {
+        "title": "Two Sum",
+        "code": "def twoSum(): pass",
+        "topic": "Arrays",
+        "platform": "leetcode",
+        "problem_slug": "two-sum",
+    }
+    r = client.post("/api/solutions", json=payload)
+    sid = r.json()["id"]
+
+    del_res = client.delete(f"/api/solutions/{sid}")
+    assert del_res.status_code == 204
+
+    got = client.get(f"/api/solutions/{sid}")
+    assert got.status_code == 404
+
+
+def test_heatmap_endpoint(client) -> None:
+    r = client.get("/api/progress/heatmap")
+    assert r.status_code == 200
+    assert isinstance(r.json(), list)
